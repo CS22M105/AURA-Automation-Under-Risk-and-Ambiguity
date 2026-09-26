@@ -1,0 +1,34 @@
+# Virtual environments
+.venv/
+venv/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Local datasets and generated artifacts
+datasets/
+data/raw/
+data/processed/
+artifacts/
+models/
+*.joblib
+*.pkl
+
+# Notebooks
+.ipynb_checkpoints/
+
+# Operating system and editors
+.DS_Store
+.vscode/
+.idea/
