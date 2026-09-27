@@ -21,7 +21,7 @@ datasets/
 data/raw/
 data/processed/
 artifacts/
-models/
+/models/
 *.joblib
 *.pkl
 
@@ -32,3 +32,8 @@ models/
 .DS_Store
 .vscode/
 .idea/
+
+# Python build and package metadata
+*.egg-info/
+build/
+dist/
