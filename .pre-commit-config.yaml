@@ -15,12 +15,12 @@ repos:
 
       - id: mypy
         name: Mypy type check
-        entry: mypy src tests
+        entry: python -m mypy src tests
         language: system
         pass_filenames: false
 
       - id: pytest
         name: Pytest
-        entry: pytest -q
+        entry: python -m pytest -q
         language: system
         pass_filenames: false

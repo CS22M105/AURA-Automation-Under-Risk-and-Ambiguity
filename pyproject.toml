@@ -7,7 +7,7 @@ name = "aura-banking"
 version = "0.1.0"
 description = "Risk-aware deferral for banking intent classification"
 readme = "README.md"
-requires-python = ">=3.11,<3.15"
+requires-python = ">=3.12,<3.15"
 dependencies = [
     "joblib>=1.4",
     "numpy>=2.1",
@@ -19,6 +19,7 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
     "mypy>=1.15",
+    "pandas-stubs>=2.2",
     "pre-commit>=4.0",
     "pytest>=8.3",
     "pytest-cov>=6.0",
@@ -30,19 +31,20 @@ where = ["src"]
 
 [tool.ruff]
 line-length = 100
-target-version = "py311"
+target-version = "py312"
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "B", "UP"]
 
 [tool.mypy]
-python_version = "3.11"
+python_version = "3.12"
 disallow_untyped_defs = true
 warn_return_any = true
 warn_unused_configs = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = ["src"]
 addopts = "--strict-markers --strict-config"
 
 [tool.coverage.run]
