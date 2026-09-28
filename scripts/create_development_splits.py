@@ -2,10 +2,10 @@
 
 import json
 from argparse import ArgumentParser
-from hashlib import sha256
 from pathlib import Path
 
 from aura.data.loading import load_banking77_csv
+from aura.data.manifests import calculate_sha256
 from aura.data.splitting import (
     DEFAULT_RANDOM_STATE,
     create_development_splits,
@@ -14,17 +14,6 @@ from aura.data.validation import (
     BANKING77_TRAIN_PROFILE,
     validate_dataset_profile,
 )
-
-
-def calculate_sha256(path: Path) -> str:
-    """Calculate the SHA-256 fingerprint of a file."""
-    digest = sha256()
-
-    with path.open("rb") as file:
-        while chunk := file.read(1024 * 1024):
-            digest.update(chunk)
-
-    return digest.hexdigest()
 
 
 def build_parser() -> ArgumentParser:

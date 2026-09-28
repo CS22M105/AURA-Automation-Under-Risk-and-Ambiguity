@@ -44,7 +44,7 @@ warn_unused_configs = true
 mypy_path = "src"
 
 [[tool.mypy.overrides]]
-module = ["sklearn.*"]
+module = ["joblib", "sklearn.*"]
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]
