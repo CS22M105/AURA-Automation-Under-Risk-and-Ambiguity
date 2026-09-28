@@ -2,8 +2,10 @@ import pandas as pd
 import pytest
 
 from aura.data.validation import (
+    DatasetProfile,
     DatasetValidationError,
     validate_banking77_frame,
+    validate_dataset_profile,
     validate_required_columns,
 )
 
@@ -104,3 +106,69 @@ def test_rejects_intent_name_with_multiple_numeric_labels() -> None:
         match="Intent names map to multiple numeric labels: \\['card_arrival'\\]",
     ):
         validate_banking77_frame(frame)
+
+
+def create_profile_frame() -> pd.DataFrame:
+    """Create a small valid dataset for profile tests."""
+    return pd.DataFrame(
+        {
+            "text": ["Where is my card?", "I need to exchange cash"],
+            "label": [0, 1],
+            "label_text": ["card_arrival", "cash_exchange"],
+        }
+    )
+
+
+def test_accepts_matching_dataset_profile() -> None:
+    profile = DatasetProfile(
+        name="test split",
+        expected_rows=2,
+        expected_label_ids=frozenset({0, 1}),
+    )
+
+    validate_dataset_profile(create_profile_frame(), profile)
+
+
+def test_rejects_unexpected_row_count() -> None:
+    profile = DatasetProfile(
+        name="test split",
+        expected_rows=3,
+        expected_label_ids=frozenset({0, 1}),
+    )
+
+    with pytest.raises(
+        DatasetValidationError,
+        match="must contain 3 rows; found 2",
+    ):
+        validate_dataset_profile(create_profile_frame(), profile)
+
+
+def test_rejects_mismatched_label_ids() -> None:
+    profile = DatasetProfile(
+        name="test split",
+        expected_rows=2,
+        expected_label_ids=frozenset({0, 2}),
+    )
+
+    with pytest.raises(
+        DatasetValidationError,
+        match=r"missing=\[2\], unexpected=\[1\]",
+    ):
+        validate_dataset_profile(create_profile_frame(), profile)
+
+
+def test_rejects_duplicate_messages() -> None:
+    frame = create_profile_frame()
+    frame.loc[1, "text"] = frame.loc[0, "text"]
+
+    profile = DatasetProfile(
+        name="test split",
+        expected_rows=2,
+        expected_label_ids=frozenset({0, 1}),
+    )
+
+    with pytest.raises(
+        DatasetValidationError,
+        match="contains 1 duplicate message",
+    ):
+        validate_dataset_profile(frame, profile)
