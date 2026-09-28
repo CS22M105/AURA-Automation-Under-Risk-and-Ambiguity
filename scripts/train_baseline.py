@@ -3,8 +3,6 @@
 from argparse import ArgumentParser
 from pathlib import Path
 
-import joblib
-
 from aura.data.loading import load_banking77_csv
 from aura.data.manifests import (
     calculate_sha256,
@@ -12,6 +10,7 @@ from aura.data.manifests import (
     validate_manifest_source,
 )
 from aura.data.validation import BANKING77_TRAIN_PROFILE, validate_dataset_profile
+from aura.models.artifacts import save_model_artifact
 from aura.models.training import train_baseline
 
 
@@ -49,19 +48,17 @@ def main() -> None:
     validate_manifest_source(manifest, dataset_path, len(frame))
 
     pipeline = train_baseline(frame, manifest.model_training)
-    artifact = {
-        "pipeline": pipeline,
-        "metadata": {
+    save_model_artifact(
+        output_path,
+        pipeline,
+        {
             "model_type": "tfidf_logistic_regression",
             "training_rows": len(manifest.model_training),
             "random_state": manifest.random_state,
             "dataset_sha256": manifest.source_sha256,
             "manifest_sha256": calculate_sha256(manifest_path),
         },
-    }
-
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    joblib.dump(artifact, output_path)
+    )
 
     classifier = pipeline.named_steps["classifier"]
     print(f"Artifact: {output_path}")
