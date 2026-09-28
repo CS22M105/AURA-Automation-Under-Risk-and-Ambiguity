@@ -15,7 +15,7 @@ repos:
 
       - id: mypy
         name: Mypy type check
-        entry: python -m mypy src tests
+        entry: python -m mypy src scripts tests
         language: system
         pass_filenames: false
 
