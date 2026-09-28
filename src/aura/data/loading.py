@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from aura.data.validation import validate_required_columns
+from aura.data.validation import validate_banking77_frame
 
 
 def load_banking77_csv(path: Path) -> pd.DataFrame:
@@ -13,6 +13,6 @@ def load_banking77_csv(path: Path) -> pd.DataFrame:
         raise FileNotFoundError(f"Dataset file does not exist: {path}")
 
     frame = pd.read_csv(path)
-    validate_required_columns(frame)
+    validate_banking77_frame(frame)
 
     return frame
