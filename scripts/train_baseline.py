@@ -1,7 +1,9 @@
 """Train and save the reproducible AURA baseline classifier."""
 
 from argparse import ArgumentParser
+from dataclasses import asdict
 from pathlib import Path
+from time import perf_counter
 
 from aura.data.loading import load_banking77_csv
 from aura.data.manifests import (
@@ -11,6 +13,7 @@ from aura.data.manifests import (
 )
 from aura.data.validation import BANKING77_TRAIN_PROFILE, validate_dataset_profile
 from aura.models.artifacts import save_model_artifact
+from aura.models.baseline import BaselineConfig
 from aura.models.training import train_baseline
 
 
@@ -47,13 +50,21 @@ def main() -> None:
     manifest = load_development_split_manifest(manifest_path)
     validate_manifest_source(manifest, dataset_path, len(frame))
 
-    pipeline = train_baseline(frame, manifest.model_training)
+    config = BaselineConfig()
+    started_at = perf_counter()
+    pipeline = train_baseline(frame, manifest.model_training, config)
+    training_seconds = perf_counter() - started_at
+    vectorizer = pipeline.named_steps["tfidf"]
+    feature_count = len(vectorizer.get_feature_names_out())
     save_model_artifact(
         output_path,
         pipeline,
         {
             "model_type": "tfidf_logistic_regression",
             "training_rows": len(manifest.model_training),
+            "training_seconds": training_seconds,
+            "feature_count": feature_count,
+            "configuration": asdict(config),
             "random_state": manifest.random_state,
             "dataset_sha256": manifest.source_sha256,
             "manifest_sha256": calculate_sha256(manifest_path),
@@ -64,6 +75,8 @@ def main() -> None:
     print(f"Artifact: {output_path}")
     print(f"Training rows: {len(manifest.model_training)}")
     print(f"Classes learned: {len(classifier.classes_)}")
+    print(f"Features: {feature_count}")
+    print(f"Training seconds: {training_seconds:.4f}")
     print("Baseline training: PASSED")
 
 
