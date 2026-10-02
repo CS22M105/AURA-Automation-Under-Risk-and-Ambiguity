@@ -3,8 +3,6 @@
 from argparse import ArgumentParser
 from pathlib import Path
 
-import numpy as np
-
 from aura.calibration.artifacts import save_calibration_artifact
 from aura.calibration.temperature import fit_temperature_scaler
 from aura.data.loading import load_banking77_csv
@@ -16,6 +14,7 @@ from aura.data.manifests import (
 from aura.data.validation import BANKING77_TRAIN_PROFILE, validate_dataset_profile
 from aura.evaluation.calibration import compute_calibration_metrics
 from aura.models.artifacts import load_model_artifact
+from aura.models.predictions import predict_with_sklearn_pipeline
 
 
 def build_parser() -> ArgumentParser:
@@ -62,16 +61,17 @@ def main() -> None:
 
     calibration_frame = frame.loc[list(manifest.calibration)]
     pipeline = model_artifact.pipeline
-    classifier = pipeline.named_steps["classifier"]
-    classes = classifier.classes_
-    decision_scores = np.asarray(
-        pipeline.decision_function(calibration_frame["text"]),
-        dtype=np.float64,
+    predictions = predict_with_sklearn_pipeline(
+        pipeline,
+        calibration_frame["text"].tolist(),
+        calibration_frame.index.tolist(),
     )
-    raw_probabilities = np.asarray(
-        pipeline.predict_proba(calibration_frame["text"]),
-        dtype=np.float64,
-    )
+    if predictions.decision_scores is None:
+        raise ValueError("Temperature scaling requires classifier decision scores")
+
+    classes = predictions.classes
+    decision_scores = predictions.decision_scores
+    raw_probabilities = predictions.probabilities
     true_labels = calibration_frame["label"].tolist()
 
     scaler = fit_temperature_scaler(decision_scores, true_labels, classes)

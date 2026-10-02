@@ -4,8 +4,6 @@ import json
 from argparse import ArgumentParser
 from pathlib import Path
 
-import numpy as np
-
 from aura.calibration.artifacts import load_calibration_artifact
 from aura.data.loading import load_banking77_csv
 from aura.data.manifests import (
@@ -17,6 +15,7 @@ from aura.data.validation import BANKING77_TRAIN_PROFILE, validate_dataset_profi
 from aura.evaluation.calibration import compute_calibration_metrics
 from aura.evaluation.classification import compute_classification_metrics
 from aura.models.artifacts import load_model_artifact
+from aura.models.predictions import predict_with_sklearn_pipeline
 
 
 def build_parser() -> ArgumentParser:
@@ -73,19 +72,19 @@ def main() -> None:
 
     evaluation_frame = frame.loc[list(manifest.policy_validation)]
     pipeline = model_artifact.pipeline
-    classifier = pipeline.named_steps["classifier"]
-    classes = classifier.classes_
-    if tuple(int(label) for label in classes) != calibration_artifact.scaler.classes:
+    predictions = predict_with_sklearn_pipeline(
+        pipeline,
+        evaluation_frame["text"].tolist(),
+        evaluation_frame.index.tolist(),
+    )
+    if predictions.classes != calibration_artifact.scaler.classes:
         raise ValueError("Calibration classes do not match the model classes")
+    if predictions.decision_scores is None:
+        raise ValueError("Temperature scaling requires classifier decision scores")
 
-    decision_scores = np.asarray(
-        pipeline.decision_function(evaluation_frame["text"]),
-        dtype=np.float64,
-    )
-    raw_probabilities = np.asarray(
-        pipeline.predict_proba(evaluation_frame["text"]),
-        dtype=np.float64,
-    )
+    classes = predictions.classes
+    decision_scores = predictions.decision_scores
+    raw_probabilities = predictions.probabilities
     calibrated_probabilities = calibration_artifact.scaler.transform(decision_scores)
     true_labels = evaluation_frame["label"].tolist()
 

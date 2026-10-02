@@ -13,6 +13,7 @@ from aura.data.manifests import (
 from aura.data.validation import BANKING77_TRAIN_PROFILE, validate_dataset_profile
 from aura.evaluation.classification import compute_classification_metrics
 from aura.models.artifacts import load_model_artifact
+from aura.models.predictions import predict_with_sklearn_pipeline
 
 
 def build_parser() -> ArgumentParser:
@@ -58,12 +59,15 @@ def main() -> None:
         raise ValueError("Model artifact was trained from a different split manifest")
 
     evaluation_frame = frame.loc[list(manifest.policy_validation)]
-    probabilities = artifact.pipeline.predict_proba(evaluation_frame["text"])
-    classifier = artifact.pipeline.named_steps["classifier"]
+    predictions = predict_with_sklearn_pipeline(
+        artifact.pipeline,
+        evaluation_frame["text"].tolist(),
+        evaluation_frame.index.tolist(),
+    )
     metrics = compute_classification_metrics(
         evaluation_frame["label"].tolist(),
-        probabilities,
-        classifier.classes_,
+        predictions.probabilities,
+        predictions.classes,
     )
 
     report: dict[str, object] = {
