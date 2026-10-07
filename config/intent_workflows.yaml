@@ -22,9 +22,9 @@ evidence_sources:
     supports: Information and disclosure requirements for transaction charges and exchange rates, plus rules governing deductions from transferred amounts.
     supported_consequence_flags: [transaction_correction]
   fatf_customer_due_diligence:
-    title: FATF Recommendation 10, Customer Due Diligence
-    url: https://www.fatf-gafi.org/content/dam/fatf-gafi/recommendations/FATF%20Standards%20-%2040%20Recommendations%20rc.pdf
-    supports: Identity verification, ongoing due diligence, and source-of-funds scrutiny where necessary.
+    title: FATF Recommendations, amended June 2026, Recommendation 10
+    url: https://www.fatf-gafi.org/en/publications/Fatfrecommendations/Fatf-recommendations.html
+    supports: Risk-based customer identity verification, ongoing due diligence, and source-of-funds scrutiny where necessary.
     supported_consequence_flags: [compliance_sensitive]
   fca_fraudulent_payments_2026:
     title: FCA Fraudulent payments consumer guidance, updated 15 May 2026
@@ -586,7 +586,7 @@ workflows:
     consequence_flags: [compliance_sensitive]
     evidence_sources: [fatf_customer_due_diligence]
     rationale: Resolves a failure in required customer identity verification.
-    review_status: provisional
+    review_status: reviewed
   - label: 69
     intent: verify_my_identity
     operational_family: identity_compliance
@@ -594,7 +594,7 @@ workflows:
     consequence_flags: [compliance_sensitive]
     evidence_sources: [fatf_customer_due_diligence]
     rationale: Performs customer identity verification for due diligence.
-    review_status: provisional
+    review_status: reviewed
   - label: 70
     intent: verify_source_of_funds
     operational_family: identity_compliance
@@ -602,15 +602,15 @@ workflows:
     consequence_flags: [compliance_sensitive]
     evidence_sources: [fatf_customer_due_diligence]
     rationale: Performs source-of-funds scrutiny where required by due diligence.
-    review_status: provisional
+    review_status: reviewed
   - label: 71
     intent: verify_top_up
-    operational_family: identity_compliance
-    required_action: verify_identity_or_funds
-    consequence_flags: [compliance_sensitive]
-    evidence_sources: [fatf_customer_due_diligence]
-    rationale: Routes funding verification to a due-diligence-sensitive workflow.
-    review_status: provisional
+    operational_family: funding_top_up
+    required_action: support_funding
+    consequence_flags: []
+    evidence_sources: []
+    rationale: Helps locate or use the verification code for the card funding a top-up.
+    review_status: reviewed
   - label: 72
     intent: virtual_card_not_working
     operational_family: card_servicing
@@ -631,10 +631,10 @@ workflows:
     intent: why_verify_identity
     operational_family: identity_compliance
     required_action: provide_information
-    consequence_flags: [compliance_sensitive]
+    consequence_flags: []
     evidence_sources: [fatf_customer_due_diligence]
     rationale: Explains the purpose of customer identity due diligence.
-    review_status: provisional
+    review_status: reviewed
   - label: 75
     intent: wrong_amount_of_cash_received
     operational_family: transaction_correction
