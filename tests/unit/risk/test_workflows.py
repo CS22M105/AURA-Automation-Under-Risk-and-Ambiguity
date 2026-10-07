@@ -23,8 +23,8 @@ def test_reviewable_specification_covers_canonical_banking77_labels() -> None:
     assert observed_mapping == BANKING77_LABELS
     assert len(specification.workflows) == 77
     assert Counter(workflow.review_status for workflow in specification.workflows) == {
-        "provisional": 44,
-        "reviewed": 33,
+        "provisional": 36,
+        "reviewed": 41,
     }
 
 
@@ -62,6 +62,24 @@ def test_identity_review_separates_top_up_support_from_due_diligence() -> None:
     assert why_verify.operational_family == "identity_compliance"
     assert why_verify.required_action == "provide_information"
     assert not why_verify.consequence_flags
+
+
+def test_funding_review_distinguishes_information_from_unresolved_funds() -> None:
+    specification = load_workflow_specification(WORKFLOW_SPECIFICATION)
+    workflows = {workflow.label: workflow for workflow in specification.workflows}
+
+    for label in (56, 57):
+        assert workflows[label].required_action == "provide_information"
+        assert not workflows[label].consequence_flags
+        assert workflows[label].evidence_sources == ("uk_psr_charges_exchange",)
+
+    failed = workflows[59]
+    assert failed.required_action == "support_funding"
+    assert not failed.consequence_flags
+    assert not failed.evidence_sources
+
+    for label in (47, 61):
+        assert workflows[label].consequence_flags == frozenset({"transaction_correction"})
 
 
 def test_consequence_flag_requires_supporting_evidence(tmp_path: Path) -> None:

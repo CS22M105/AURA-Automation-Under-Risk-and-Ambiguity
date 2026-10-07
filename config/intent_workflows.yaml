@@ -74,7 +74,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Configures an optional account-funding feature.
-    review_status: provisional
+    review_status: reviewed
   - label: 5
     intent: balance_not_updated_after_bank_transfer
     operational_family: transaction_correction
@@ -418,7 +418,7 @@ workflows:
     consequence_flags: [transaction_correction]
     evidence_sources: [uk_psr_execution_correction]
     rationale: Investigates unresolved account-funding execution.
-    review_status: provisional
+    review_status: reviewed
   - label: 48
     intent: pending_transfer
     operational_family: transaction_correction
@@ -486,19 +486,19 @@ workflows:
   - label: 56
     intent: top_up_by_bank_transfer_charge
     operational_family: funding_top_up
-    required_action: trace_or_correct_transaction
-    consequence_flags: [transaction_correction]
-    evidence_sources: [uk_psr_execution_correction]
-    rationale: Investigates a disputed charge related to bank-transfer funding.
-    review_status: provisional
+    required_action: provide_information
+    consequence_flags: []
+    evidence_sources: [uk_psr_charges_exchange]
+    rationale: Explains charges associated with funding an account by bank transfer.
+    review_status: reviewed
   - label: 57
     intent: top_up_by_card_charge
     operational_family: funding_top_up
-    required_action: trace_or_correct_transaction
-    consequence_flags: [transaction_correction]
-    evidence_sources: [uk_psr_execution_correction]
-    rationale: Investigates a disputed charge related to card funding.
-    review_status: provisional
+    required_action: provide_information
+    consequence_flags: []
+    evidence_sources: [uk_psr_charges_exchange]
+    rationale: Explains charges associated with funding an account by card.
+    review_status: reviewed
   - label: 58
     intent: top_up_by_cash_or_cheque
     operational_family: funding_top_up
@@ -506,15 +506,15 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Explains or supports an account-funding method.
-    review_status: provisional
+    review_status: reviewed
   - label: 59
     intent: top_up_failed
     operational_family: funding_top_up
-    required_action: trace_or_correct_transaction
-    consequence_flags: [transaction_correction]
-    evidence_sources: [uk_psr_execution_correction]
-    rationale: Investigates account funding that failed to execute.
-    review_status: provisional
+    required_action: support_funding
+    consequence_flags: []
+    evidence_sources: []
+    rationale: Diagnoses or provides alternatives for account funding that failed to execute.
+    review_status: reviewed
   - label: 60
     intent: top_up_limits
     operational_family: routine_information
@@ -530,7 +530,7 @@ workflows:
     consequence_flags: [transaction_correction]
     evidence_sources: [uk_psr_execution_correction]
     rationale: Investigates account funding that was subsequently reversed.
-    review_status: provisional
+    review_status: reviewed
   - label: 62
     intent: topping_up_by_card
     operational_family: funding_top_up
@@ -538,7 +538,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Explains or supports card-based account funding.
-    review_status: provisional
+    review_status: reviewed
   - label: 63
     intent: transaction_charged_twice
     operational_family: transaction_correction
