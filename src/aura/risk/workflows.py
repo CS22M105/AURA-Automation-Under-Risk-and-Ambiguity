@@ -81,10 +81,23 @@ class IntentWorkflow:
 
 
 @dataclass(frozen=True)
+class SpecificationGovernance:
+    """The review basis and limitations attached to a frozen specification."""
+
+    frozen_on: str
+    review_basis: str
+    external_domain_review: bool
+    intended_use: str
+    limitation: str
+
+
+@dataclass(frozen=True)
 class WorkflowSpecification:
     """A complete, versioned set of workflow and evidence assignments."""
 
     schema_version: int
+    specification_id: str
+    governance: SpecificationGovernance
     evidence_sources: dict[str, EvidenceSource]
     workflows: tuple[IntentWorkflow, ...]
 
@@ -98,6 +111,12 @@ def _require_mapping(value: object, context: str) -> dict[str, Any]:
 def _require_string(value: object, context: str) -> str:
     if not isinstance(value, str) or not value.strip():
         raise WorkflowSpecificationError(f"{context} must be a non-blank string")
+    return value
+
+
+def _require_bool(value: object, context: str) -> bool:
+    if not isinstance(value, bool):
+        raise WorkflowSpecificationError(f"{context} must be a boolean")
     return value
 
 
@@ -142,6 +161,23 @@ def _parse_evidence_sources(value: object) -> dict[str, EvidenceSource]:
             supported_consequence_flags=supported_flags,
         )
     return sources
+
+
+def _parse_governance(value: object) -> SpecificationGovernance:
+    raw = _require_mapping(value, "governance")
+    intended_use = _require_string(raw.get("intended_use"), "governance intended_use")
+    if intended_use != "research_only":
+        raise WorkflowSpecificationError("governance intended_use must be 'research_only'")
+    return SpecificationGovernance(
+        frozen_on=_require_string(raw.get("frozen_on"), "governance frozen_on"),
+        review_basis=_require_string(raw.get("review_basis"), "governance review_basis"),
+        external_domain_review=_require_bool(
+            raw.get("external_domain_review"),
+            "governance external_domain_review",
+        ),
+        intended_use=intended_use,
+        limitation=_require_string(raw.get("limitation"), "governance limitation"),
+    )
 
 
 def _parse_workflow(
@@ -261,15 +297,19 @@ def load_workflow_specification(path: Path) -> WorkflowSpecification:
             f"missing={missing}, unexpected={unexpected}, mismatched={mismatched}"
         )
 
+    specification_id = _require_string(root.get("specification_id"), "specification_id")
+    governance = _parse_governance(root.get("governance"))
     return WorkflowSpecification(
         schema_version=1,
+        specification_id=specification_id,
+        governance=governance,
         evidence_sources=evidence_sources,
         workflows=workflows,
     )
 
 
 def require_frozen_specification(specification: WorkflowSpecification) -> None:
-    """Prevent provisional workflow judgments from entering routing experiments."""
+    """Prevent non-frozen workflow judgments from entering routing experiments."""
     unresolved = [
         workflow.label for workflow in specification.workflows if workflow.review_status != "frozen"
     ]

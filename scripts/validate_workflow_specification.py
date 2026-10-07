@@ -1,4 +1,4 @@
-"""Validate and summarize the provisional BANKING77 workflow specification."""
+"""Validate and summarize the BANKING77 workflow specification."""
 
 from argparse import ArgumentParser
 from collections import Counter
@@ -29,7 +29,12 @@ def main() -> None:
     status_counts = Counter(workflow.review_status for workflow in specification.workflows)
 
     print(f"Specification: {path}")
+    print(f"Specification ID: {specification.specification_id}")
     print(f"Schema version: {specification.schema_version}")
+    print(f"Frozen on: {specification.governance.frozen_on}")
+    print(f"Review basis: {specification.governance.review_basis}")
+    print(f"External domain review: {specification.governance.external_domain_review}")
+    print(f"Intended use: {specification.governance.intended_use}")
     print(f"Workflows: {len(specification.workflows)}")
     print(f"Evidence sources: {len(specification.evidence_sources)}")
     print(f"Families: {dict(sorted(family_counts.items()))}")

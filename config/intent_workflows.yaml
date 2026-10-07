@@ -1,4 +1,11 @@
 schema_version: 1
+specification_id: aura-banking77-workflows-v1
+governance:
+  frozen_on: "2026-10-07"
+  review_basis: Source-informed internal review of BANKING77 examples and declared primary evidence.
+  external_domain_review: false
+  intended_use: research_only
+  limitation: The workflow map is a research assumption and has not been validated against a real bank's operations or loss data.
 
 evidence_sources:
   uk_psr_security_notification:
@@ -32,8 +39,8 @@ evidence_sources:
     supports: Prompt reporting, investigation, protection, and refund handling for unauthorized payments and compromised access credentials.
     supported_consequence_flags: [protective_action, unauthorized_transaction, transaction_correction]
 
-# All assignments remain non-frozen. Routing code must reject this specification
-# until every entry has been independently reviewed and marked frozen.
+# Frozen research specification v1. External banking-domain validation was not
+# performed and must not be implied in reporting or deployment claims.
 workflows:
   - label: 0
     intent: activate_my_card
@@ -42,7 +49,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Card activation requires instrument servicing rather than transaction investigation.
-    review_status: reviewed
+    review_status: frozen
   - label: 1
     intent: age_limit
     operational_family: routine_information
@@ -50,7 +57,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Explains product eligibility requirements without initiating a corrective workflow.
-    review_status: reviewed
+    review_status: frozen
   - label: 2
     intent: apple_pay_or_google_pay
     operational_family: funding_top_up
@@ -58,7 +65,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Explains or troubleshoots account funding through Apple Pay or Google Pay.
-    review_status: reviewed
+    review_status: frozen
   - label: 3
     intent: atm_support
     operational_family: routine_information
@@ -66,7 +73,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Provides information about supported cash withdrawal facilities.
-    review_status: reviewed
+    review_status: frozen
   - label: 4
     intent: automatic_top_up
     operational_family: funding_top_up
@@ -74,7 +81,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Configures an optional account-funding feature.
-    review_status: reviewed
+    review_status: frozen
   - label: 5
     intent: balance_not_updated_after_bank_transfer
     operational_family: transaction_correction
@@ -82,7 +89,7 @@ workflows:
     consequence_flags: [transaction_correction]
     evidence_sources: [uk_psr_execution_correction]
     rationale: Requires tracing or correcting a transfer that is not reflected in the balance.
-    review_status: reviewed
+    review_status: frozen
   - label: 6
     intent: balance_not_updated_after_cheque_or_cash_deposit
     operational_family: transaction_correction
@@ -90,7 +97,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Requires investigation of deposited funds that are not reflected in the balance.
-    review_status: reviewed
+    review_status: frozen
   - label: 7
     intent: beneficiary_not_allowed
     operational_family: transfer_servicing
@@ -98,7 +105,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Requires transfer-recipient setup or eligibility support.
-    review_status: reviewed
+    review_status: frozen
   - label: 8
     intent: cancel_transfer
     operational_family: transaction_correction
@@ -106,7 +113,7 @@ workflows:
     consequence_flags: [transaction_correction]
     evidence_sources: [uk_psr_execution_correction]
     rationale: Requires a time-sensitive attempt to stop or reverse a transfer.
-    review_status: reviewed
+    review_status: frozen
   - label: 9
     intent: card_about_to_expire
     operational_family: card_servicing
@@ -114,7 +121,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Requires renewal or replacement-card servicing.
-    review_status: reviewed
+    review_status: frozen
   - label: 10
     intent: card_acceptance
     operational_family: routine_information
@@ -122,7 +129,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Provides information about where a card can be used.
-    review_status: reviewed
+    review_status: frozen
   - label: 11
     intent: card_arrival
     operational_family: card_servicing
@@ -130,7 +137,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Supports card delivery status and fulfilment.
-    review_status: reviewed
+    review_status: frozen
   - label: 12
     intent: card_delivery_estimate
     operational_family: routine_information
@@ -138,7 +145,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Provides an estimated card-delivery timeframe.
-    review_status: reviewed
+    review_status: frozen
   - label: 13
     intent: card_linking
     operational_family: card_servicing
@@ -146,7 +153,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Supports linking a payment card to the account.
-    review_status: reviewed
+    review_status: frozen
   - label: 14
     intent: card_not_working
     operational_family: card_servicing
@@ -154,7 +161,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Troubleshoots or restores ordinary card functionality.
-    review_status: reviewed
+    review_status: frozen
   - label: 15
     intent: card_payment_fee_charged
     operational_family: transaction_correction
@@ -162,7 +169,7 @@ workflows:
     consequence_flags: [transaction_correction]
     evidence_sources: [uk_psr_charges_exchange]
     rationale: Investigates a disputed fee attached to a card payment.
-    review_status: reviewed
+    review_status: frozen
   - label: 16
     intent: card_payment_not_recognised
     operational_family: unauthorized_transaction
@@ -170,7 +177,7 @@ workflows:
     consequence_flags: [protective_action, unauthorized_transaction, transaction_correction]
     evidence_sources: [uk_psr_security_notification, uk_psr_unauthorized_payment, fca_fraudulent_payments_2026]
     rationale: Requires authorization investigation, possible protection, and dispute handling.
-    review_status: reviewed
+    review_status: frozen
   - label: 17
     intent: card_payment_wrong_exchange_rate
     operational_family: transaction_correction
@@ -178,7 +185,7 @@ workflows:
     consequence_flags: [transaction_correction]
     evidence_sources: [uk_psr_charges_exchange]
     rationale: Investigates and potentially corrects the exchange rate applied to a payment.
-    review_status: reviewed
+    review_status: frozen
   - label: 18
     intent: card_swallowed
     operational_family: card_servicing
@@ -186,7 +193,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Requires card recovery, replacement, or access-restoration support.
-    review_status: reviewed
+    review_status: frozen
   - label: 19
     intent: cash_withdrawal_charge
     operational_family: transaction_correction
@@ -194,7 +201,7 @@ workflows:
     consequence_flags: [transaction_correction]
     evidence_sources: [uk_psr_charges_exchange]
     rationale: Investigates a disputed charge associated with a cash withdrawal.
-    review_status: reviewed
+    review_status: frozen
   - label: 20
     intent: cash_withdrawal_not_recognised
     operational_family: unauthorized_transaction
@@ -202,7 +209,7 @@ workflows:
     consequence_flags: [protective_action, unauthorized_transaction, transaction_correction]
     evidence_sources: [uk_psr_security_notification, uk_psr_unauthorized_payment, fca_fraudulent_payments_2026]
     rationale: Requires prompt investigation and protection for a potentially unauthorized withdrawal.
-    review_status: reviewed
+    review_status: frozen
   - label: 21
     intent: change_pin
     operational_family: card_servicing
@@ -210,7 +217,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Performs routine payment-instrument credential servicing.
-    review_status: reviewed
+    review_status: frozen
   - label: 22
     intent: compromised_card
     operational_family: security_protection
@@ -218,7 +225,7 @@ workflows:
     consequence_flags: [protective_action]
     evidence_sources: [uk_psr_security_notification, fca_fraudulent_payments_2026]
     rationale: Requires prompt card protection to reduce potential unauthorized use.
-    review_status: reviewed
+    review_status: frozen
   - label: 23
     intent: contactless_not_working
     operational_family: card_servicing
@@ -226,7 +233,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Troubleshoots a payment-instrument feature.
-    review_status: reviewed
+    review_status: frozen
   - label: 24
     intent: country_support
     operational_family: routine_information
@@ -234,7 +241,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Provides geographic product-availability information.
-    review_status: reviewed
+    review_status: frozen
   - label: 25
     intent: declined_card_payment
     operational_family: transaction_correction
@@ -242,7 +249,7 @@ workflows:
     consequence_flags: [transaction_correction]
     evidence_sources: [uk_psr_execution_correction]
     rationale: Investigates why an attempted card payment was not executed.
-    review_status: reviewed
+    review_status: frozen
   - label: 26
     intent: declined_cash_withdrawal
     operational_family: transaction_correction
@@ -250,7 +257,7 @@ workflows:
     consequence_flags: [transaction_correction]
     evidence_sources: [uk_psr_execution_correction]
     rationale: Investigates why an attempted withdrawal was not executed.
-    review_status: reviewed
+    review_status: frozen
   - label: 27
     intent: declined_transfer
     operational_family: transaction_correction
@@ -258,7 +265,7 @@ workflows:
     consequence_flags: [transaction_correction]
     evidence_sources: [uk_psr_execution_correction]
     rationale: Investigates why an attempted transfer was not executed.
-    review_status: reviewed
+    review_status: frozen
   - label: 28
     intent: direct_debit_payment_not_recognised
     operational_family: unauthorized_transaction
@@ -266,7 +273,7 @@ workflows:
     consequence_flags: [protective_action, unauthorized_transaction, transaction_correction]
     evidence_sources: [uk_psr_security_notification, uk_psr_unauthorized_payment, fca_fraudulent_payments_2026]
     rationale: Requires authorization investigation and dispute handling for a direct debit.
-    review_status: reviewed
+    review_status: frozen
   - label: 29
     intent: disposable_card_limits
     operational_family: routine_information
@@ -274,7 +281,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Explains usage limits for a card feature.
-    review_status: reviewed
+    review_status: frozen
   - label: 30
     intent: edit_personal_details
     operational_family: account_administration
@@ -282,7 +289,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Updates routine customer account information.
-    review_status: reviewed
+    review_status: frozen
   - label: 31
     intent: exchange_charge
     operational_family: routine_information
@@ -290,7 +297,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Explains charges associated with currency exchange.
-    review_status: reviewed
+    review_status: frozen
   - label: 32
     intent: exchange_rate
     operational_family: routine_information
@@ -298,7 +305,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Provides exchange-rate information.
-    review_status: reviewed
+    review_status: frozen
   - label: 33
     intent: exchange_via_app
     operational_family: routine_information
@@ -306,7 +313,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Explains how to perform currency exchange in the application.
-    review_status: reviewed
+    review_status: frozen
   - label: 34
     intent: extra_charge_on_statement
     operational_family: transaction_correction
@@ -314,7 +321,7 @@ workflows:
     consequence_flags: [transaction_correction]
     evidence_sources: [uk_psr_charges_exchange]
     rationale: Investigates an unexpected statement charge and its transaction origin.
-    review_status: reviewed
+    review_status: frozen
   - label: 35
     intent: failed_transfer
     operational_family: transaction_correction
@@ -322,7 +329,7 @@ workflows:
     consequence_flags: [transaction_correction]
     evidence_sources: [uk_psr_execution_correction]
     rationale: Traces or corrects a transfer that failed to execute.
-    review_status: reviewed
+    review_status: frozen
   - label: 36
     intent: fiat_currency_support
     operational_family: routine_information
@@ -330,7 +337,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Provides supported-currency information.
-    review_status: reviewed
+    review_status: frozen
   - label: 37
     intent: get_disposable_virtual_card
     operational_family: card_servicing
@@ -338,7 +345,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Fulfils a request for a disposable virtual payment instrument.
-    review_status: reviewed
+    review_status: frozen
   - label: 38
     intent: get_physical_card
     operational_family: card_servicing
@@ -346,7 +353,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Helps a physical-card holder locate or retrieve the card PIN.
-    review_status: reviewed
+    review_status: frozen
   - label: 39
     intent: getting_spare_card
     operational_family: card_servicing
@@ -354,7 +361,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Fulfils a request for an additional card.
-    review_status: reviewed
+    review_status: frozen
   - label: 40
     intent: getting_virtual_card
     operational_family: card_servicing
@@ -362,7 +369,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Fulfils a request for a virtual payment instrument.
-    review_status: reviewed
+    review_status: frozen
   - label: 41
     intent: lost_or_stolen_card
     operational_family: security_protection
@@ -370,7 +377,7 @@ workflows:
     consequence_flags: [protective_action]
     evidence_sources: [uk_psr_security_notification, fca_fraudulent_payments_2026]
     rationale: Requires prompt prevention of further use and replacement support.
-    review_status: reviewed
+    review_status: frozen
   - label: 42
     intent: lost_or_stolen_phone
     operational_family: security_protection
@@ -378,7 +385,7 @@ workflows:
     consequence_flags: [protective_action]
     evidence_sources: [uk_psr_security_notification, fca_fraudulent_payments_2026]
     rationale: Requires prompt protection of account access exposed through a lost device.
-    review_status: reviewed
+    review_status: frozen
   - label: 43
     intent: order_physical_card
     operational_family: card_servicing
@@ -386,7 +393,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Fulfils an ordinary physical-card order.
-    review_status: reviewed
+    review_status: frozen
   - label: 44
     intent: passcode_forgotten
     operational_family: security_protection
@@ -394,7 +401,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Restores authenticated account access without an explicit compromise report.
-    review_status: reviewed
+    review_status: frozen
   - label: 45
     intent: pending_card_payment
     operational_family: transaction_correction
@@ -402,7 +409,7 @@ workflows:
     consequence_flags: [transaction_correction]
     evidence_sources: [uk_psr_execution_correction]
     rationale: Investigates a card payment whose execution state remains unresolved.
-    review_status: reviewed
+    review_status: frozen
   - label: 46
     intent: pending_cash_withdrawal
     operational_family: transaction_correction
@@ -410,7 +417,7 @@ workflows:
     consequence_flags: [transaction_correction]
     evidence_sources: [uk_psr_execution_correction]
     rationale: Investigates an unresolved cash-withdrawal transaction state.
-    review_status: reviewed
+    review_status: frozen
   - label: 47
     intent: pending_top_up
     operational_family: funding_top_up
@@ -418,7 +425,7 @@ workflows:
     consequence_flags: [transaction_correction]
     evidence_sources: [uk_psr_execution_correction]
     rationale: Investigates unresolved account-funding execution.
-    review_status: reviewed
+    review_status: frozen
   - label: 48
     intent: pending_transfer
     operational_family: transaction_correction
@@ -426,7 +433,7 @@ workflows:
     consequence_flags: [transaction_correction]
     evidence_sources: [uk_psr_execution_correction]
     rationale: Traces a transfer whose execution remains pending.
-    review_status: reviewed
+    review_status: frozen
   - label: 49
     intent: pin_blocked
     operational_family: card_servicing
@@ -434,7 +441,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Restores use of a blocked payment-instrument credential.
-    review_status: reviewed
+    review_status: frozen
   - label: 50
     intent: receiving_money
     operational_family: routine_information
@@ -442,7 +449,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Explains how incoming funds are received.
-    review_status: reviewed
+    review_status: frozen
   - label: 51
     intent: Refund_not_showing_up
     operational_family: transaction_correction
@@ -450,7 +457,7 @@ workflows:
     consequence_flags: [transaction_correction]
     evidence_sources: [uk_psr_execution_correction]
     rationale: Traces an expected refund that is not reflected in the account.
-    review_status: reviewed
+    review_status: frozen
   - label: 52
     intent: request_refund
     operational_family: transaction_correction
@@ -458,7 +465,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Initiates refund handling for a completed transaction.
-    review_status: reviewed
+    review_status: frozen
   - label: 53
     intent: reverted_card_payment?
     operational_family: transaction_correction
@@ -466,7 +473,7 @@ workflows:
     consequence_flags: [transaction_correction]
     evidence_sources: [uk_psr_execution_correction]
     rationale: Investigates a card payment that was reversed or restored.
-    review_status: reviewed
+    review_status: frozen
   - label: 54
     intent: supported_cards_and_currencies
     operational_family: routine_information
@@ -474,7 +481,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Provides supported funding-instrument and currency information.
-    review_status: reviewed
+    review_status: frozen
   - label: 55
     intent: terminate_account
     operational_family: account_administration
@@ -482,7 +489,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Performs account closure through an administrative workflow.
-    review_status: reviewed
+    review_status: frozen
   - label: 56
     intent: top_up_by_bank_transfer_charge
     operational_family: funding_top_up
@@ -490,7 +497,7 @@ workflows:
     consequence_flags: []
     evidence_sources: [uk_psr_charges_exchange]
     rationale: Explains charges associated with funding an account by bank transfer.
-    review_status: reviewed
+    review_status: frozen
   - label: 57
     intent: top_up_by_card_charge
     operational_family: funding_top_up
@@ -498,7 +505,7 @@ workflows:
     consequence_flags: []
     evidence_sources: [uk_psr_charges_exchange]
     rationale: Explains charges associated with funding an account by card.
-    review_status: reviewed
+    review_status: frozen
   - label: 58
     intent: top_up_by_cash_or_cheque
     operational_family: funding_top_up
@@ -506,7 +513,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Explains or supports an account-funding method.
-    review_status: reviewed
+    review_status: frozen
   - label: 59
     intent: top_up_failed
     operational_family: funding_top_up
@@ -514,7 +521,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Diagnoses or provides alternatives for account funding that failed to execute.
-    review_status: reviewed
+    review_status: frozen
   - label: 60
     intent: top_up_limits
     operational_family: routine_information
@@ -522,7 +529,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Explains account-funding limits.
-    review_status: reviewed
+    review_status: frozen
   - label: 61
     intent: top_up_reverted
     operational_family: funding_top_up
@@ -530,7 +537,7 @@ workflows:
     consequence_flags: [transaction_correction]
     evidence_sources: [uk_psr_execution_correction]
     rationale: Investigates account funding that was subsequently reversed.
-    review_status: reviewed
+    review_status: frozen
   - label: 62
     intent: topping_up_by_card
     operational_family: funding_top_up
@@ -538,7 +545,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Explains or supports card-based account funding.
-    review_status: reviewed
+    review_status: frozen
   - label: 63
     intent: transaction_charged_twice
     operational_family: transaction_correction
@@ -546,7 +553,7 @@ workflows:
     consequence_flags: [transaction_correction]
     evidence_sources: [uk_psr_execution_correction]
     rationale: Investigates and corrects a potentially duplicated transaction.
-    review_status: reviewed
+    review_status: frozen
   - label: 64
     intent: transfer_fee_charged
     operational_family: transfer_servicing
@@ -554,7 +561,7 @@ workflows:
     consequence_flags: [transaction_correction]
     evidence_sources: [uk_psr_charges_exchange]
     rationale: Investigates a disputed fee attached to a transfer.
-    review_status: reviewed
+    review_status: frozen
   - label: 65
     intent: transfer_into_account
     operational_family: funding_top_up
@@ -562,7 +569,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Explains how to fund the customer's account by bank transfer.
-    review_status: reviewed
+    review_status: frozen
   - label: 66
     intent: transfer_not_received_by_recipient
     operational_family: transaction_correction
@@ -570,7 +577,7 @@ workflows:
     consequence_flags: [transaction_correction]
     evidence_sources: [uk_psr_execution_correction]
     rationale: Traces a transfer that the intended recipient has not received.
-    review_status: reviewed
+    review_status: frozen
   - label: 67
     intent: transfer_timing
     operational_family: routine_information
@@ -578,7 +585,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Provides expected transfer execution timing.
-    review_status: reviewed
+    review_status: frozen
   - label: 68
     intent: unable_to_verify_identity
     operational_family: identity_compliance
@@ -586,7 +593,7 @@ workflows:
     consequence_flags: [compliance_sensitive]
     evidence_sources: [fatf_customer_due_diligence]
     rationale: Resolves a failure in required customer identity verification.
-    review_status: reviewed
+    review_status: frozen
   - label: 69
     intent: verify_my_identity
     operational_family: identity_compliance
@@ -594,7 +601,7 @@ workflows:
     consequence_flags: [compliance_sensitive]
     evidence_sources: [fatf_customer_due_diligence]
     rationale: Performs customer identity verification for due diligence.
-    review_status: reviewed
+    review_status: frozen
   - label: 70
     intent: verify_source_of_funds
     operational_family: identity_compliance
@@ -602,7 +609,7 @@ workflows:
     consequence_flags: [compliance_sensitive]
     evidence_sources: [fatf_customer_due_diligence]
     rationale: Performs source-of-funds scrutiny where required by due diligence.
-    review_status: reviewed
+    review_status: frozen
   - label: 71
     intent: verify_top_up
     operational_family: funding_top_up
@@ -610,7 +617,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Helps locate or use the verification code for the card funding a top-up.
-    review_status: reviewed
+    review_status: frozen
   - label: 72
     intent: virtual_card_not_working
     operational_family: card_servicing
@@ -618,7 +625,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Troubleshoots or restores a virtual payment instrument.
-    review_status: reviewed
+    review_status: frozen
   - label: 73
     intent: visa_or_mastercard
     operational_family: routine_information
@@ -626,7 +633,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Provides payment-network product information.
-    review_status: reviewed
+    review_status: frozen
   - label: 74
     intent: why_verify_identity
     operational_family: identity_compliance
@@ -634,7 +641,7 @@ workflows:
     consequence_flags: []
     evidence_sources: [fatf_customer_due_diligence]
     rationale: Explains the purpose of customer identity due diligence.
-    review_status: reviewed
+    review_status: frozen
   - label: 75
     intent: wrong_amount_of_cash_received
     operational_family: transaction_correction
@@ -642,7 +649,7 @@ workflows:
     consequence_flags: [transaction_correction]
     evidence_sources: [uk_psr_execution_correction]
     rationale: Investigates and corrects a discrepancy in cash dispensed.
-    review_status: reviewed
+    review_status: frozen
   - label: 76
     intent: wrong_exchange_rate_for_cash_withdrawal
     operational_family: transaction_correction
@@ -650,4 +657,4 @@ workflows:
     consequence_flags: [transaction_correction]
     evidence_sources: [uk_psr_charges_exchange]
     rationale: Investigates and potentially corrects the exchange rate applied to a withdrawal.
-    review_status: reviewed
+    review_status: frozen

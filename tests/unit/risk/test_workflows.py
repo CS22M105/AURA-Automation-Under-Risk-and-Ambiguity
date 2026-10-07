@@ -1,4 +1,5 @@
 from collections import Counter
+from dataclasses import replace
 from pathlib import Path
 
 import pytest
@@ -14,24 +15,48 @@ PROJECT_ROOT = Path(__file__).parents[3]
 WORKFLOW_SPECIFICATION = PROJECT_ROOT / "config" / "intent_workflows.yaml"
 
 
-def test_reviewable_specification_covers_canonical_banking77_labels() -> None:
+def test_frozen_specification_covers_canonical_banking77_labels() -> None:
     specification = load_workflow_specification(WORKFLOW_SPECIFICATION)
 
     observed_mapping = {workflow.label: workflow.intent for workflow in specification.workflows}
 
     assert specification.schema_version == 1
+    assert specification.specification_id == "aura-banking77-workflows-v1"
+    assert specification.governance.intended_use == "research_only"
+    assert not specification.governance.external_domain_review
     assert observed_mapping == BANKING77_LABELS
     assert len(specification.workflows) == 77
-    assert Counter(workflow.review_status for workflow in specification.workflows) == {
-        "reviewed": 77
-    }
+    assert Counter(workflow.review_status for workflow in specification.workflows) == {"frozen": 77}
 
 
-def test_unfrozen_specification_cannot_be_used_for_routing() -> None:
+def test_frozen_specification_can_be_used_for_research_routing() -> None:
     specification = load_workflow_specification(WORKFLOW_SPECIFICATION)
 
+    require_frozen_specification(specification)
+
+
+def test_later_unfrozen_edit_blocks_routing() -> None:
+    specification = load_workflow_specification(WORKFLOW_SPECIFICATION)
+    changed_workflow = replace(specification.workflows[0], review_status="reviewed")
+    changed_specification = replace(
+        specification,
+        workflows=(changed_workflow, *specification.workflows[1:]),
+    )
+
     with pytest.raises(WorkflowSpecificationError, match="not frozen"):
-        require_frozen_specification(specification)
+        require_frozen_specification(changed_specification)
+
+
+def test_rejects_non_research_governance(tmp_path: Path) -> None:
+    path = tmp_path / "production-specification.yaml"
+    payload = WORKFLOW_SPECIFICATION.read_text(encoding="utf-8").replace(
+        "intended_use: research_only",
+        "intended_use: production",
+    )
+    path.write_text(payload, encoding="utf-8")
+
+    with pytest.raises(WorkflowSpecificationError, match="must be 'research_only'"):
+        load_workflow_specification(path)
 
 
 def test_transaction_review_does_not_overstate_unsupported_consequences() -> None:
@@ -39,7 +64,7 @@ def test_transaction_review_does_not_overstate_unsupported_consequences() -> Non
     workflows = {workflow.label: workflow for workflow in specification.workflows}
 
     for label in (6, 52):
-        assert workflows[label].review_status == "reviewed"
+        assert workflows[label].review_status == "frozen"
         assert not workflows[label].consequence_flags
         assert not workflows[label].evidence_sources
 
@@ -94,8 +119,8 @@ def test_card_review_uses_dataset_meaning_for_opaque_intent_names() -> None:
     assert physical_card.required_action == "manage_payment_instrument"
     assert "PIN" in physical_card.rationale
 
-    reviewed_labels = {0, 2, 9, 11, 13, 14, 18, 21, 23, 37, 38, 39, 40, 43, 49, 72}
-    assert all(workflows[label].review_status == "reviewed" for label in reviewed_labels)
+    frozen_labels = {0, 2, 9, 11, 13, 14, 18, 21, 23, 37, 38, 39, 40, 43, 49, 72}
+    assert all(workflows[label].review_status == "frozen" for label in frozen_labels)
 
 
 def test_routine_information_review_remains_non_consequential() -> None:
@@ -109,7 +134,7 @@ def test_routine_information_review_remains_non_consequential() -> None:
     assert len(routine_workflows) == 15
     assert all(workflow.required_action == "provide_information" for workflow in routine_workflows)
     assert all(not workflow.consequence_flags for workflow in routine_workflows)
-    assert all(workflow.review_status == "reviewed" for workflow in routine_workflows)
+    assert all(workflow.review_status == "frozen" for workflow in routine_workflows)
 
 
 def test_account_and_transfer_review_completes_all_intents() -> None:
@@ -127,7 +152,7 @@ def test_account_and_transfer_review_completes_all_intents() -> None:
     assert transfer_into_account.operational_family == "funding_top_up"
     assert transfer_into_account.required_action == "support_funding"
 
-    assert all(workflow.review_status == "reviewed" for workflow in workflows.values())
+    assert all(workflow.review_status == "frozen" for workflow in workflows.values())
 
 
 def test_consequence_flag_requires_supporting_evidence(tmp_path: Path) -> None:

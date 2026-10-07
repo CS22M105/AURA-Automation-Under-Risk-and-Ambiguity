@@ -2,7 +2,7 @@
 
 **Prepared:** October 7, 2026
 **Project:** Cost-aware selective intent classification on BANKING77
-**Decision requested:** Approve or revise the intent-to-workflow specification
+**Current status:** Internally frozen for research; external validation remains optional
 
 ## The Project in One Paragraph
 
@@ -27,7 +27,7 @@ Calibrated probabilities for 77 intents
       +-------------------------------+
       |                               |
       v                               v
-Predicted intent             Approved workflow map  <-- REVIEW THIS
+Predicted intent             Frozen workflow map v1  <-- INTERNALLY REVIEWED
       |                               |
       +---------------+---------------+
                       v
@@ -41,8 +41,9 @@ Predicted intent             Approved workflow map  <-- REVIEW THIS
 ```
 
 The classifier and calibration are complete. The workflow map has received an internal
-dataset-and-evidence review, but it is deliberately blocked from routing until an
-external reviewer approves it.
+dataset-and-evidence review and is frozen for research experiments. It has not been
+validated by a banking-domain expert, so this packet remains available for optional
+external review and later improvement.
 
 ## What Has Been Defined
 
@@ -106,9 +107,10 @@ The principal sources are:
 The specification validator rejects consequence flags with missing, unknown, or
 unrelated evidence. It also rejects routing use unless every intent is marked `frozen`.
 
-## Requested Review
+## Optional External Review
 
-Please review the workflow summary and the ten highlighted decisions above. The complete
+An external reviewer may review the workflow summary and the ten highlighted decisions
+above. The complete
 machine-readable specification is in `config/intent_workflows.yaml`. Detailed reasoning
 is available in `docs/workflow_reviews/`.
 
@@ -133,11 +135,11 @@ Select one outcome:
 
 **Signature or written confirmation reference:** __________________
 
-## What Happens After Approval
+## What Happens After External Review
 
 1. Record the reviewer and approval reference.
 2. Apply any requested revisions and rerun validation.
-3. Change approved entries from `reviewed` to `frozen`.
+3. Publish a new frozen specification version if assignments change.
 4. Generate qualitative pairwise routing-consequence profiles.
 5. Define multiple explicit cost scenarios and sensitivity tests.
 6. Compare confidence-only and cost-aware AUTO/DEFER policies at matched coverage.
