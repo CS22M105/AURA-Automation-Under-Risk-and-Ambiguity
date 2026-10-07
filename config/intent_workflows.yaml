@@ -50,7 +50,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Explains product eligibility requirements without initiating a corrective workflow.
-    review_status: provisional
+    review_status: reviewed
   - label: 2
     intent: apple_pay_or_google_pay
     operational_family: funding_top_up
@@ -66,7 +66,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Provides information about supported cash withdrawal facilities.
-    review_status: provisional
+    review_status: reviewed
   - label: 4
     intent: automatic_top_up
     operational_family: funding_top_up
@@ -122,7 +122,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Provides information about where a card can be used.
-    review_status: provisional
+    review_status: reviewed
   - label: 11
     intent: card_arrival
     operational_family: card_servicing
@@ -138,7 +138,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Provides an estimated card-delivery timeframe.
-    review_status: provisional
+    review_status: reviewed
   - label: 13
     intent: card_linking
     operational_family: card_servicing
@@ -234,7 +234,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Provides geographic product-availability information.
-    review_status: provisional
+    review_status: reviewed
   - label: 25
     intent: declined_card_payment
     operational_family: transaction_correction
@@ -274,7 +274,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Explains usage limits for a card feature.
-    review_status: provisional
+    review_status: reviewed
   - label: 30
     intent: edit_personal_details
     operational_family: account_administration
@@ -290,7 +290,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Explains charges associated with currency exchange.
-    review_status: provisional
+    review_status: reviewed
   - label: 32
     intent: exchange_rate
     operational_family: routine_information
@@ -298,7 +298,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Provides exchange-rate information.
-    review_status: provisional
+    review_status: reviewed
   - label: 33
     intent: exchange_via_app
     operational_family: routine_information
@@ -306,7 +306,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Explains how to perform currency exchange in the application.
-    review_status: provisional
+    review_status: reviewed
   - label: 34
     intent: extra_charge_on_statement
     operational_family: transaction_correction
@@ -330,7 +330,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Provides supported-currency information.
-    review_status: provisional
+    review_status: reviewed
   - label: 37
     intent: get_disposable_virtual_card
     operational_family: card_servicing
@@ -442,7 +442,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Explains how incoming funds are received.
-    review_status: provisional
+    review_status: reviewed
   - label: 51
     intent: Refund_not_showing_up
     operational_family: transaction_correction
@@ -474,7 +474,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Provides supported funding-instrument and currency information.
-    review_status: provisional
+    review_status: reviewed
   - label: 55
     intent: terminate_account
     operational_family: account_administration
@@ -522,7 +522,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Explains account-funding limits.
-    review_status: provisional
+    review_status: reviewed
   - label: 61
     intent: top_up_reverted
     operational_family: funding_top_up
@@ -578,7 +578,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Provides expected transfer execution timing.
-    review_status: provisional
+    review_status: reviewed
   - label: 68
     intent: unable_to_verify_identity
     operational_family: identity_compliance
@@ -626,7 +626,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Provides payment-network product information.
-    review_status: provisional
+    review_status: reviewed
   - label: 74
     intent: why_verify_identity
     operational_family: identity_compliance

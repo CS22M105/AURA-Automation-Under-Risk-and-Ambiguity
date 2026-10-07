@@ -23,8 +23,8 @@ def test_reviewable_specification_covers_canonical_banking77_labels() -> None:
     assert observed_mapping == BANKING77_LABELS
     assert len(specification.workflows) == 77
     assert Counter(workflow.review_status for workflow in specification.workflows) == {
-        "provisional": 20,
-        "reviewed": 57,
+        "provisional": 5,
+        "reviewed": 72,
     }
 
 
@@ -97,6 +97,20 @@ def test_card_review_uses_dataset_meaning_for_opaque_intent_names() -> None:
 
     reviewed_labels = {0, 2, 9, 11, 13, 14, 18, 21, 23, 37, 38, 39, 40, 43, 49, 72}
     assert all(workflows[label].review_status == "reviewed" for label in reviewed_labels)
+
+
+def test_routine_information_review_remains_non_consequential() -> None:
+    specification = load_workflow_specification(WORKFLOW_SPECIFICATION)
+    routine_workflows = [
+        workflow
+        for workflow in specification.workflows
+        if workflow.operational_family == "routine_information"
+    ]
+
+    assert len(routine_workflows) == 15
+    assert all(workflow.required_action == "provide_information" for workflow in routine_workflows)
+    assert all(not workflow.consequence_flags for workflow in routine_workflows)
+    assert all(workflow.review_status == "reviewed" for workflow in routine_workflows)
 
 
 def test_consequence_flag_requires_supporting_evidence(tmp_path: Path) -> None:
