@@ -1,7 +1,7 @@
 # Funding and Top-Up Workflow Review
 
-**Review date:** October 7, 2026  
-**Scope:** Nine BANKING77 intents assigned to `funding_top_up`  
+**Review date:** October 7, 2026
+**Scope:** Ten BANKING77 intents assigned to `funding_top_up`
 **Status:** Evidence reviewed; not domain-approved or frozen
 
 ## Review Standard
@@ -19,6 +19,7 @@ ledger, or downstream case outcome from which actual harm could be inferred.
 
 | Label | Intent | Decision | Reason |
 |---:|---|---|---|
+| 2 | `apple_pay_or_google_pay` | Move from card servicing without flag | The local examples ask whether or how to fund an account through Apple Pay or Google Pay, rather than how to manage a linked bank card. |
 | 4 | `automatic_top_up` | Retain without flag | This configures an optional funding feature. |
 | 47 | `pending_top_up` | Retain action and flag | The examples explicitly describe funds remaining pending or absent from the available balance. |
 | 56 | `top_up_by_bank_transfer_charge` | Change to information; remove flag | The examples primarily ask prospectively whether a fee applies rather than disputing an assessed charge. |
@@ -47,6 +48,6 @@ reported later when analyzing DistilBERT confusions between funding intents.
 
 ## Remaining Gate
 
-All nine entries are `reviewed`, not `frozen`. A banking-domain reviewer should confirm
+All ten entries are `reviewed`, not `frozen`. A banking-domain reviewer should confirm
 whether pending and reverted card top-ups use the same operational queue and whether
 failed top-ups ever require a separate financial-correction path.

@@ -23,8 +23,8 @@ def test_reviewable_specification_covers_canonical_banking77_labels() -> None:
     assert observed_mapping == BANKING77_LABELS
     assert len(specification.workflows) == 77
     assert Counter(workflow.review_status for workflow in specification.workflows) == {
-        "provisional": 36,
-        "reviewed": 41,
+        "provisional": 20,
+        "reviewed": 57,
     }
 
 
@@ -80,6 +80,23 @@ def test_funding_review_distinguishes_information_from_unresolved_funds() -> Non
 
     for label in (47, 61):
         assert workflows[label].consequence_flags == frozenset({"transaction_correction"})
+
+
+def test_card_review_uses_dataset_meaning_for_opaque_intent_names() -> None:
+    specification = load_workflow_specification(WORKFLOW_SPECIFICATION)
+    workflows = {workflow.label: workflow for workflow in specification.workflows}
+
+    digital_wallet = workflows[2]
+    assert digital_wallet.operational_family == "funding_top_up"
+    assert digital_wallet.required_action == "support_funding"
+
+    physical_card = workflows[38]
+    assert physical_card.operational_family == "card_servicing"
+    assert physical_card.required_action == "manage_payment_instrument"
+    assert "PIN" in physical_card.rationale
+
+    reviewed_labels = {0, 2, 9, 11, 13, 14, 18, 21, 23, 37, 38, 39, 40, 43, 49, 72}
+    assert all(workflows[label].review_status == "reviewed" for label in reviewed_labels)
 
 
 def test_consequence_flag_requires_supporting_evidence(tmp_path: Path) -> None:

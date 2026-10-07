@@ -42,7 +42,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Card activation requires instrument servicing rather than transaction investigation.
-    review_status: provisional
+    review_status: reviewed
   - label: 1
     intent: age_limit
     operational_family: routine_information
@@ -53,12 +53,12 @@ workflows:
     review_status: provisional
   - label: 2
     intent: apple_pay_or_google_pay
-    operational_family: card_servicing
-    required_action: manage_payment_instrument
+    operational_family: funding_top_up
+    required_action: support_funding
     consequence_flags: []
     evidence_sources: []
-    rationale: Supports linking or using a payment instrument with a digital wallet.
-    review_status: provisional
+    rationale: Explains or troubleshoots account funding through Apple Pay or Google Pay.
+    review_status: reviewed
   - label: 3
     intent: atm_support
     operational_family: routine_information
@@ -114,7 +114,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Requires renewal or replacement-card servicing.
-    review_status: provisional
+    review_status: reviewed
   - label: 10
     intent: card_acceptance
     operational_family: routine_information
@@ -130,7 +130,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Supports card delivery status and fulfilment.
-    review_status: provisional
+    review_status: reviewed
   - label: 12
     intent: card_delivery_estimate
     operational_family: routine_information
@@ -146,7 +146,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Supports linking a payment card to the account.
-    review_status: provisional
+    review_status: reviewed
   - label: 14
     intent: card_not_working
     operational_family: card_servicing
@@ -154,7 +154,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Troubleshoots or restores ordinary card functionality.
-    review_status: provisional
+    review_status: reviewed
   - label: 15
     intent: card_payment_fee_charged
     operational_family: transaction_correction
@@ -186,7 +186,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Requires card recovery, replacement, or access-restoration support.
-    review_status: provisional
+    review_status: reviewed
   - label: 19
     intent: cash_withdrawal_charge
     operational_family: transaction_correction
@@ -210,7 +210,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Performs routine payment-instrument credential servicing.
-    review_status: provisional
+    review_status: reviewed
   - label: 22
     intent: compromised_card
     operational_family: security_protection
@@ -226,7 +226,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Troubleshoots a payment-instrument feature.
-    review_status: provisional
+    review_status: reviewed
   - label: 24
     intent: country_support
     operational_family: routine_information
@@ -338,15 +338,15 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Fulfils a request for a disposable virtual payment instrument.
-    review_status: provisional
+    review_status: reviewed
   - label: 38
     intent: get_physical_card
     operational_family: card_servicing
-    required_action: fulfil_card_request
+    required_action: manage_payment_instrument
     consequence_flags: []
     evidence_sources: []
-    rationale: Fulfils a request for a physical card.
-    review_status: provisional
+    rationale: Helps a physical-card holder locate or retrieve the card PIN.
+    review_status: reviewed
   - label: 39
     intent: getting_spare_card
     operational_family: card_servicing
@@ -354,7 +354,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Fulfils a request for an additional card.
-    review_status: provisional
+    review_status: reviewed
   - label: 40
     intent: getting_virtual_card
     operational_family: card_servicing
@@ -362,7 +362,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Fulfils a request for a virtual payment instrument.
-    review_status: provisional
+    review_status: reviewed
   - label: 41
     intent: lost_or_stolen_card
     operational_family: security_protection
@@ -386,7 +386,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Fulfils an ordinary physical-card order.
-    review_status: provisional
+    review_status: reviewed
   - label: 44
     intent: passcode_forgotten
     operational_family: security_protection
@@ -434,7 +434,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Restores use of a blocked payment-instrument credential.
-    review_status: provisional
+    review_status: reviewed
   - label: 50
     intent: receiving_money
     operational_family: routine_information
@@ -618,7 +618,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Troubleshoots or restores a virtual payment instrument.
-    review_status: provisional
+    review_status: reviewed
   - label: 73
     intent: visa_or_mastercard
     operational_family: routine_information
