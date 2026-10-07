@@ -23,12 +23,11 @@ def test_reviewable_specification_covers_canonical_banking77_labels() -> None:
     assert observed_mapping == BANKING77_LABELS
     assert len(specification.workflows) == 77
     assert Counter(workflow.review_status for workflow in specification.workflows) == {
-        "provisional": 5,
-        "reviewed": 72,
+        "reviewed": 77
     }
 
 
-def test_provisional_specification_cannot_be_used_for_routing() -> None:
+def test_unfrozen_specification_cannot_be_used_for_routing() -> None:
     specification = load_workflow_specification(WORKFLOW_SPECIFICATION)
 
     with pytest.raises(WorkflowSpecificationError, match="not frozen"):
@@ -111,6 +110,24 @@ def test_routine_information_review_remains_non_consequential() -> None:
     assert all(workflow.required_action == "provide_information" for workflow in routine_workflows)
     assert all(not workflow.consequence_flags for workflow in routine_workflows)
     assert all(workflow.review_status == "reviewed" for workflow in routine_workflows)
+
+
+def test_account_and_transfer_review_completes_all_intents() -> None:
+    specification = load_workflow_specification(WORKFLOW_SPECIFICATION)
+    workflows = {workflow.label: workflow for workflow in specification.workflows}
+
+    assert workflows[30].required_action == "update_account"
+    assert workflows[55].required_action == "terminate_account"
+
+    transfer_fee = workflows[64]
+    assert transfer_fee.operational_family == "transfer_servicing"
+    assert transfer_fee.evidence_sources == ("uk_psr_charges_exchange",)
+
+    transfer_into_account = workflows[65]
+    assert transfer_into_account.operational_family == "funding_top_up"
+    assert transfer_into_account.required_action == "support_funding"
+
+    assert all(workflow.review_status == "reviewed" for workflow in workflows.values())
 
 
 def test_consequence_flag_requires_supporting_evidence(tmp_path: Path) -> None:

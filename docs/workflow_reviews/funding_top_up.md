@@ -1,7 +1,7 @@
 # Funding and Top-Up Workflow Review
 
 **Review date:** October 7, 2026
-**Scope:** Ten BANKING77 intents assigned to `funding_top_up`
+**Scope:** Eleven BANKING77 intents assigned to `funding_top_up`
 **Status:** Evidence reviewed; not domain-approved or frozen
 
 ## Review Standard
@@ -28,6 +28,7 @@ ledger, or downstream case outcome from which actual harm could be inferred.
 | 59 | `top_up_failed` | Change to funding support; remove flag | A declined or failed attempt needs diagnosis or an alternative method, but the label does not prove that funds require correction. |
 | 61 | `top_up_reverted` | Retain action and flag | The examples describe funding that appeared and was then reversed or disappeared, leaving transaction state to investigate. |
 | 62 | `topping_up_by_card` | Retain without flag, with caveat | The intended class is card-funding instructions, although some training examples appear to describe missing top-ups and overlap with label 47. |
+| 65 | `transfer_into_account` | Move from transfer servicing without flag | The examples ask how to fund the customer's own account by bank transfer rather than how to route an outgoing transfer. |
 | 71 | `verify_top_up` | Retain corrected funding assignment | The examples ask about a card top-up verification code, not customer identity due diligence. |
 
 ## Evidence Used
@@ -48,6 +49,6 @@ reported later when analyzing DistilBERT confusions between funding intents.
 
 ## Remaining Gate
 
-All ten entries are `reviewed`, not `frozen`. A banking-domain reviewer should confirm
+All eleven entries are `reviewed`, not `frozen`. A banking-domain reviewer should confirm
 whether pending and reverted card top-ups use the same operational queue and whether
 failed top-ups ever require a separate financial-correction path.

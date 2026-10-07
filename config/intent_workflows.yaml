@@ -98,7 +98,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Requires transfer-recipient setup or eligibility support.
-    review_status: provisional
+    review_status: reviewed
   - label: 8
     intent: cancel_transfer
     operational_family: transaction_correction
@@ -282,7 +282,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Updates routine customer account information.
-    review_status: provisional
+    review_status: reviewed
   - label: 31
     intent: exchange_charge
     operational_family: routine_information
@@ -482,7 +482,7 @@ workflows:
     consequence_flags: []
     evidence_sources: []
     rationale: Performs account closure through an administrative workflow.
-    review_status: provisional
+    review_status: reviewed
   - label: 56
     intent: top_up_by_bank_transfer_charge
     operational_family: funding_top_up
@@ -552,17 +552,17 @@ workflows:
     operational_family: transfer_servicing
     required_action: trace_or_correct_transaction
     consequence_flags: [transaction_correction]
-    evidence_sources: [uk_psr_execution_correction]
+    evidence_sources: [uk_psr_charges_exchange]
     rationale: Investigates a disputed fee attached to a transfer.
-    review_status: provisional
+    review_status: reviewed
   - label: 65
     intent: transfer_into_account
-    operational_family: transfer_servicing
-    required_action: configure_transfer
+    operational_family: funding_top_up
+    required_action: support_funding
     consequence_flags: []
     evidence_sources: []
-    rationale: Provides instructions for transferring funds into the account.
-    review_status: provisional
+    rationale: Explains how to fund the customer's account by bank transfer.
+    review_status: reviewed
   - label: 66
     intent: transfer_not_received_by_recipient
     operational_family: transaction_correction
