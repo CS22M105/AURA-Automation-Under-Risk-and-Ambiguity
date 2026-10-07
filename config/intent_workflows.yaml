@@ -12,9 +12,14 @@ evidence_sources:
     supports: Investigation, liability, restoration, and timely refund obligations for unauthorized payment transactions.
     supported_consequence_flags: [unauthorized_transaction, transaction_correction]
   uk_psr_execution_correction:
-    title: UK Payment Services Regulations 2017, regulations 91-94
+    title: UK Payment Services Regulations 2017, regulations 74 and 81-94
     url: https://www.legislation.gov.uk/uksi/2017/752/2026-04-28/data.htm
-    supports: Tracing, correction, refund, and associated charge or interest obligations for defective, failed, or late payments.
+    supports: Notification, refusal, revocation, execution timing, tracing, correction, refund, and liability rules for payment transactions.
+    supported_consequence_flags: [transaction_correction]
+  uk_psr_charges_exchange:
+    title: UK Payment Services Regulations 2017, regulations 43-61, 66, and 84
+    url: https://www.legislation.gov.uk/uksi/2017/752/contents
+    supports: Information and disclosure requirements for transaction charges and exchange rates, plus rules governing deductions from transferred amounts.
     supported_consequence_flags: [transaction_correction]
   fatf_customer_due_diligence:
     title: FATF Recommendation 10, Customer Due Diligence
@@ -27,7 +32,7 @@ evidence_sources:
     supports: Prompt reporting, investigation, protection, and refund handling for unauthorized payments and compromised access credentials.
     supported_consequence_flags: [protective_action, unauthorized_transaction, transaction_correction]
 
-# All assignments remain provisional. Routing code must reject this specification
+# All assignments remain non-frozen. Routing code must reject this specification
 # until every entry has been independently reviewed and marked frozen.
 workflows:
   - label: 0
@@ -77,15 +82,15 @@ workflows:
     consequence_flags: [transaction_correction]
     evidence_sources: [uk_psr_execution_correction]
     rationale: Requires tracing or correcting a transfer that is not reflected in the balance.
-    review_status: provisional
+    review_status: reviewed
   - label: 6
     intent: balance_not_updated_after_cheque_or_cash_deposit
     operational_family: transaction_correction
     required_action: trace_or_correct_transaction
-    consequence_flags: [transaction_correction]
-    evidence_sources: [uk_psr_execution_correction]
+    consequence_flags: []
+    evidence_sources: []
     rationale: Requires investigation of deposited funds that are not reflected in the balance.
-    review_status: provisional
+    review_status: reviewed
   - label: 7
     intent: beneficiary_not_allowed
     operational_family: transfer_servicing
@@ -101,7 +106,7 @@ workflows:
     consequence_flags: [transaction_correction]
     evidence_sources: [uk_psr_execution_correction]
     rationale: Requires a time-sensitive attempt to stop or reverse a transfer.
-    review_status: provisional
+    review_status: reviewed
   - label: 9
     intent: card_about_to_expire
     operational_family: card_servicing
@@ -155,9 +160,9 @@ workflows:
     operational_family: transaction_correction
     required_action: trace_or_correct_transaction
     consequence_flags: [transaction_correction]
-    evidence_sources: [uk_psr_execution_correction]
+    evidence_sources: [uk_psr_charges_exchange]
     rationale: Investigates a disputed fee attached to a card payment.
-    review_status: provisional
+    review_status: reviewed
   - label: 16
     intent: card_payment_not_recognised
     operational_family: unauthorized_transaction
@@ -171,9 +176,9 @@ workflows:
     operational_family: transaction_correction
     required_action: trace_or_correct_transaction
     consequence_flags: [transaction_correction]
-    evidence_sources: [uk_psr_execution_correction]
+    evidence_sources: [uk_psr_charges_exchange]
     rationale: Investigates and potentially corrects the exchange rate applied to a payment.
-    review_status: provisional
+    review_status: reviewed
   - label: 18
     intent: card_swallowed
     operational_family: card_servicing
@@ -187,9 +192,9 @@ workflows:
     operational_family: transaction_correction
     required_action: trace_or_correct_transaction
     consequence_flags: [transaction_correction]
-    evidence_sources: [uk_psr_execution_correction]
+    evidence_sources: [uk_psr_charges_exchange]
     rationale: Investigates a disputed charge associated with a cash withdrawal.
-    review_status: provisional
+    review_status: reviewed
   - label: 20
     intent: cash_withdrawal_not_recognised
     operational_family: unauthorized_transaction
@@ -237,7 +242,7 @@ workflows:
     consequence_flags: [transaction_correction]
     evidence_sources: [uk_psr_execution_correction]
     rationale: Investigates why an attempted card payment was not executed.
-    review_status: provisional
+    review_status: reviewed
   - label: 26
     intent: declined_cash_withdrawal
     operational_family: transaction_correction
@@ -245,7 +250,7 @@ workflows:
     consequence_flags: [transaction_correction]
     evidence_sources: [uk_psr_execution_correction]
     rationale: Investigates why an attempted withdrawal was not executed.
-    review_status: provisional
+    review_status: reviewed
   - label: 27
     intent: declined_transfer
     operational_family: transaction_correction
@@ -253,7 +258,7 @@ workflows:
     consequence_flags: [transaction_correction]
     evidence_sources: [uk_psr_execution_correction]
     rationale: Investigates why an attempted transfer was not executed.
-    review_status: provisional
+    review_status: reviewed
   - label: 28
     intent: direct_debit_payment_not_recognised
     operational_family: unauthorized_transaction
@@ -307,9 +312,9 @@ workflows:
     operational_family: transaction_correction
     required_action: trace_or_correct_transaction
     consequence_flags: [transaction_correction]
-    evidence_sources: [uk_psr_execution_correction]
+    evidence_sources: [uk_psr_charges_exchange]
     rationale: Investigates an unexpected statement charge and its transaction origin.
-    review_status: provisional
+    review_status: reviewed
   - label: 35
     intent: failed_transfer
     operational_family: transaction_correction
@@ -317,7 +322,7 @@ workflows:
     consequence_flags: [transaction_correction]
     evidence_sources: [uk_psr_execution_correction]
     rationale: Traces or corrects a transfer that failed to execute.
-    review_status: provisional
+    review_status: reviewed
   - label: 36
     intent: fiat_currency_support
     operational_family: routine_information
@@ -397,7 +402,7 @@ workflows:
     consequence_flags: [transaction_correction]
     evidence_sources: [uk_psr_execution_correction]
     rationale: Investigates a card payment whose execution state remains unresolved.
-    review_status: provisional
+    review_status: reviewed
   - label: 46
     intent: pending_cash_withdrawal
     operational_family: transaction_correction
@@ -405,7 +410,7 @@ workflows:
     consequence_flags: [transaction_correction]
     evidence_sources: [uk_psr_execution_correction]
     rationale: Investigates an unresolved cash-withdrawal transaction state.
-    review_status: provisional
+    review_status: reviewed
   - label: 47
     intent: pending_top_up
     operational_family: funding_top_up
@@ -421,7 +426,7 @@ workflows:
     consequence_flags: [transaction_correction]
     evidence_sources: [uk_psr_execution_correction]
     rationale: Traces a transfer whose execution remains pending.
-    review_status: provisional
+    review_status: reviewed
   - label: 49
     intent: pin_blocked
     operational_family: card_servicing
@@ -445,15 +450,15 @@ workflows:
     consequence_flags: [transaction_correction]
     evidence_sources: [uk_psr_execution_correction]
     rationale: Traces an expected refund that is not reflected in the account.
-    review_status: provisional
+    review_status: reviewed
   - label: 52
     intent: request_refund
     operational_family: transaction_correction
     required_action: process_refund_or_cancellation
-    consequence_flags: [transaction_correction]
-    evidence_sources: [uk_psr_execution_correction]
+    consequence_flags: []
+    evidence_sources: []
     rationale: Initiates refund handling for a completed transaction.
-    review_status: provisional
+    review_status: reviewed
   - label: 53
     intent: reverted_card_payment?
     operational_family: transaction_correction
@@ -461,7 +466,7 @@ workflows:
     consequence_flags: [transaction_correction]
     evidence_sources: [uk_psr_execution_correction]
     rationale: Investigates a card payment that was reversed or restored.
-    review_status: provisional
+    review_status: reviewed
   - label: 54
     intent: supported_cards_and_currencies
     operational_family: routine_information
@@ -541,7 +546,7 @@ workflows:
     consequence_flags: [transaction_correction]
     evidence_sources: [uk_psr_execution_correction]
     rationale: Investigates and corrects a potentially duplicated transaction.
-    review_status: provisional
+    review_status: reviewed
   - label: 64
     intent: transfer_fee_charged
     operational_family: transfer_servicing
@@ -565,7 +570,7 @@ workflows:
     consequence_flags: [transaction_correction]
     evidence_sources: [uk_psr_execution_correction]
     rationale: Traces a transfer that the intended recipient has not received.
-    review_status: provisional
+    review_status: reviewed
   - label: 67
     intent: transfer_timing
     operational_family: routine_information
@@ -637,12 +642,12 @@ workflows:
     consequence_flags: [transaction_correction]
     evidence_sources: [uk_psr_execution_correction]
     rationale: Investigates and corrects a discrepancy in cash dispensed.
-    review_status: provisional
+    review_status: reviewed
   - label: 76
     intent: wrong_exchange_rate_for_cash_withdrawal
     operational_family: transaction_correction
     required_action: trace_or_correct_transaction
     consequence_flags: [transaction_correction]
-    evidence_sources: [uk_psr_execution_correction]
+    evidence_sources: [uk_psr_charges_exchange]
     rationale: Investigates and potentially corrects the exchange rate applied to a withdrawal.
-    review_status: provisional
+    review_status: reviewed

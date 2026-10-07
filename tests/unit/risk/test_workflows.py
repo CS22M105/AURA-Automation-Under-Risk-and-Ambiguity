@@ -23,8 +23,8 @@ def test_reviewable_specification_covers_canonical_banking77_labels() -> None:
     assert observed_mapping == BANKING77_LABELS
     assert len(specification.workflows) == 77
     assert Counter(workflow.review_status for workflow in specification.workflows) == {
-        "provisional": 70,
-        "reviewed": 7,
+        "provisional": 49,
+        "reviewed": 28,
     }
 
 
@@ -33,6 +33,19 @@ def test_provisional_specification_cannot_be_used_for_routing() -> None:
 
     with pytest.raises(WorkflowSpecificationError, match="not frozen"):
         require_frozen_specification(specification)
+
+
+def test_transaction_review_does_not_overstate_unsupported_consequences() -> None:
+    specification = load_workflow_specification(WORKFLOW_SPECIFICATION)
+    workflows = {workflow.label: workflow for workflow in specification.workflows}
+
+    for label in (6, 52):
+        assert workflows[label].review_status == "reviewed"
+        assert not workflows[label].consequence_flags
+        assert not workflows[label].evidence_sources
+
+    for label in (15, 17, 19, 34, 76):
+        assert workflows[label].evidence_sources == ("uk_psr_charges_exchange",)
 
 
 def test_consequence_flag_requires_supporting_evidence(tmp_path: Path) -> None:
