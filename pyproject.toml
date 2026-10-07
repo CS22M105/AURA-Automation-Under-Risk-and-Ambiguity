@@ -26,6 +26,10 @@ dev = [
     "pytest-cov>=6.0",
     "ruff>=0.11",
 ]
+transformer = [
+    "torch>=2.7",
+    "transformers>=4.52,<6",
+]
 
 [tool.setuptools.packages.find]
 where = ["src"]
