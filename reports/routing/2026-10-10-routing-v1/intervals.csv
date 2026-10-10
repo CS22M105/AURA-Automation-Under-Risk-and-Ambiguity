@@ -1,0 +1,21 @@
+target_coverage,accepted_count,difference,lower,upper,evaluation_scenario,comparison,candidate,reference,metric
+0.5,750,0.0,-0.0026648900732844,0.0,moderate,original,moderate,confidence,candidate minus reference accepted cost per input
+0.7,1050,-0.0053297801465689,-0.0153231179213857,0.0019986675549633,moderate,original,moderate,confidence,candidate minus reference accepted cost per input
+0.8,1200,0.0019986675549633,-0.0093271152564956,0.0086608927381745,moderate,original,moderate,confidence,candidate minus reference accepted cost per input
+0.9,1350,-0.0053297801465689,-0.0146568954030646,0.00599600266489,moderate,original,moderate,confidence,candidate minus reference accepted cost per input
+1.0,1501,0.0,0.0,0.0,moderate,original,moderate,confidence,candidate minus reference accepted cost per input
+0.5,750,0.0,-0.0019986675549633,0.0019986675549633,flat,lexical,signed_cost_gate,original_aura,candidate minus reference accepted cost per input
+0.7,1050,-0.0026648900732844,-0.0073284477015323,0.0013324450366422,flat,lexical,signed_cost_gate,original_aura,candidate minus reference accepted cost per input
+0.8,1200,-0.0099933377748167,-0.0153231179213857,-0.0039973351099267,flat,lexical,signed_cost_gate,original_aura,candidate minus reference accepted cost per input
+0.9,1350,-0.0126582278481012,-0.0179880079946702,-0.00599600266489,flat,lexical,signed_cost_gate,original_aura,candidate minus reference accepted cost per input
+1.0,1501,0.0,0.0,0.0,flat,lexical,signed_cost_gate,original_aura,candidate minus reference accepted cost per input
+0.5,750,-0.0006662225183211,-0.0039973351099267,0.0019986675549633,moderate,lexical,signed_cost_gate,original_aura,candidate minus reference accepted cost per input
+0.7,1050,-0.0046635576282478,-0.0126582278481012,0.0,moderate,lexical,signed_cost_gate,original_aura,candidate minus reference accepted cost per input
+0.8,1200,-0.0173217854763491,-0.0293137908061292,-0.00599600266489,moderate,lexical,signed_cost_gate,original_aura,candidate minus reference accepted cost per input
+0.9,1350,-0.0159893404397068,-0.027981345769487,-0.0019986675549633,moderate,lexical,signed_cost_gate,original_aura,candidate minus reference accepted cost per input
+1.0,1501,0.0,0.0,0.0,moderate,lexical,signed_cost_gate,original_aura,candidate minus reference accepted cost per input
+0.5,750,-0.0013324450366422,-0.00599600266489,0.0026648900732844,high_protection,lexical,signed_cost_gate,original_aura,candidate minus reference accepted cost per input
+0.7,1050,-0.0066622251832111,-0.0179880079946702,-0.0006662225183211,high_protection,lexical,signed_cost_gate,original_aura,candidate minus reference accepted cost per input
+0.8,1200,-0.0253164556962025,-0.0459693537641572,-0.0073284477015323,high_protection,lexical,signed_cost_gate,original_aura,candidate minus reference accepted cost per input
+0.9,1350,-0.0193204530313124,-0.0406395736175882,0.0053297801465689,high_protection,lexical,signed_cost_gate,original_aura,candidate minus reference accepted cost per input
+1.0,1501,0.0,0.0,0.0,high_protection,lexical,signed_cost_gate,original_aura,candidate minus reference accepted cost per input
