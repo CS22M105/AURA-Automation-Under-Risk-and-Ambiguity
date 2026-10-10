@@ -1,0 +1,35 @@
+schema_version: 1
+scenario_set_id: aura-consequence-scenarios-v1
+workflow_specification_id: aura-banking77-workflows-v1
+unit: relative_research_cost
+construction: maximum_floor
+
+# These are sensitivity assumptions, not monetary losses or bank-validated values.
+scenarios:
+  flat:
+    description: Control scenario in which every incorrect intent route costs one unit.
+    base_incorrect_cost: 1
+    action_mismatch_cost: 1
+    omitted_consequence_costs:
+      compliance_sensitive: 1
+      protective_action: 1
+      transaction_correction: 1
+      unauthorized_transaction: 1
+  moderate:
+    description: Gives higher cost to omitted corrective, compliance, and protective work.
+    base_incorrect_cost: 1
+    action_mismatch_cost: 2
+    omitted_consequence_costs:
+      compliance_sensitive: 3
+      protective_action: 5
+      transaction_correction: 3
+      unauthorized_transaction: 5
+  high_protection:
+    description: Stress scenario that increases the penalty for omitted protective work.
+    base_incorrect_cost: 1
+    action_mismatch_cost: 3
+    omitted_consequence_costs:
+      compliance_sensitive: 5
+      protective_action: 10
+      transaction_correction: 5
+      unauthorized_transaction: 10
