@@ -1,0 +1,26 @@
+{
+  "archive": "artifacts/snapshots/2026-10-10-final-routing-v1.zip",
+  "archive_sha256": "db6fa166e389a08792358b7c956a56cdd7eb2d23dc7754f9332015dd300951ef",
+  "evaluation_stage": "final_test",
+  "files": {
+    "artifacts/final_evaluation/aura-final-evaluation-v1/comparison.csv": "52bc48551c66a1c5a52ba7e45f744dab450b33e870e4ef9cb51f570de8daf050",
+    "artifacts/final_evaluation/aura-final-evaluation-v1/decisions.csv": "9b6b1b12f2b9720948128650344956f0eb16a2fba5048bb755e3cdda6f96c5d8",
+    "artifacts/final_evaluation/aura-final-evaluation-v1/environment.json": "1dafbbbb2ffa29d43b912d14aaf17132be9a111f79a897588689d86f285cd431",
+    "artifacts/final_evaluation/aura-final-evaluation-v1/labeled_predictions.csv": "afea4d43917156d7664979a67f99c47143e6835047fd8437fdb119c3410cf680",
+    "artifacts/final_evaluation/aura-final-evaluation-v1/overlap_audit.csv": "277b82ed57b5aa1192dec805d27c3f0446b693c1cd44be7febd2f28a64fcecf4",
+    "artifacts/final_evaluation/aura-final-evaluation-v1/overlap_summary.json": "019d2b7abd7b1f7533754fd0ef935063927d664da59c51d23959346d5ccefcf0",
+    "artifacts/final_evaluation/aura-final-evaluation-v1/predictions.npz": "aa24c26bfcdc701f3ab24aa38256ca111d0c174649191f8cfacfe39dde0b9e19",
+    "artifacts/final_evaluation/aura-final-evaluation-v1/primary_interval.csv": "720a350a23e6956ad756363941a6c0f86ce9cdc5c055b2228c69b2e3e1835ce4",
+    "artifacts/final_evaluation/aura-final-evaluation-v1/primary_result.json": "c7f759dbcc880b1cc93d40baf6616f5b3c2f25ad9d7b0c694367095a164f4062",
+    "artifacts/final_evaluation/aura-final-evaluation-v1/protocol.json": "a6f9bf18f007818feac2e022581e95bfb118991dc841a9d48dae5839cdb9d57c",
+    "artifacts/final_evaluation/aura-final-evaluation-v1/protocol_lock.json": "57e3c73dc07f5b8a3a40e75799de58f67dce4314997db7a15dc7688ee4b258a9",
+    "artifacts/final_evaluation/aura-final-evaluation-v1/run_state.json": "c11b648b67cfb47bc5b3ecff357d3da8d519866cf82a9457bd3680d09a36f784",
+    "artifacts/final_evaluation/aura-final-evaluation-v1/runner_lock.json": "efd594dde5e8b0c113d8f9306c771ab9626894d6f8a2959fca9d15528ea20f80",
+    "artifacts/final_evaluation/aura-final-evaluation-v1/scores.csv": "4d32110a7332a695e75602997bb45aefe120459174418a7a47b23ff52a9c3de2",
+    "artifacts/final_evaluation/aura-final-evaluation-v1/summary.json": "b35e2a25ef884d7df34707b3d7c00e5f10aaaf51b7c04decb1c196edf702a15b",
+    "docs/FINAL_RESULTS.md": "74d466775e9b816dd880623169febad6b739a0efbe5f081ecbfe5631dc31722e"
+  },
+  "remote_backup_performed": false,
+  "scope": "Final routing outputs and interpretation; not model weights or training data",
+  "snapshot_id": "2026-10-10-final-routing-v1"
+}
