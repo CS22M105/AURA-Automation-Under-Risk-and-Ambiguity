@@ -1,0 +1,14 @@
+{
+  "created_at_utc": "2026-10-10T19:52:20.344701+00:00",
+  "file_sha256": {
+    "docs/FINAL_RUNNER.md": "3a4a7ead6768487ac49a469112736de17a37b0c6b8f757fcf988e0fc10f7165e",
+    "scripts/evaluate_final_routing.py": "db60aa89bc646862f0dabb9daf386637dc1d35e8a12b947cc21394d367b49cab",
+    "src/aura/evaluation/final_routing.py": "5b7250d340958d5c3e0b41cce2a3490a567cc6c01f3ad4a59c373d75d19e0efb",
+    "tests/unit/evaluation/test_final_routing.py": "4ebc636d15c737e2842fb1f09a1f07891a9272cb22a117b777f2e1420bceb624",
+    "tests/unit/evaluation/test_final_runner.py": "0cd332dadef25d289b3b614066e1dac8cbb382e26085641ad49348dd2b6bb0fe"
+  },
+  "protocol_id": "aura-final-evaluation-v1",
+  "protocol_lock_sha256": "57e3c73dc07f5b8a3a40e75799de58f67dce4314997db7a15dc7688ee4b258a9",
+  "runner_id": "aura-final-runner-v1",
+  "test_accessed_during_implementation": false
+}
