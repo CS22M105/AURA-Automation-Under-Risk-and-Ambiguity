@@ -1,0 +1,4 @@
+# Keep the archived pyproject.toml unchanged and the teaching notebook's saved
+# cells/outputs intact. Reusable Python modules and scripts remain fully checked.
+extend = "pyproject.toml"
+extend-exclude = ["*.ipynb"]

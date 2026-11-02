@@ -15,7 +15,7 @@ repos:
 
       - id: mypy
         name: Mypy type check
-        entry: python -m mypy src scripts tests
+        entry: python -m mypy src scripts tests aura_demo_ui.py aura_demo_package.py train_aura.py
         language: system
         pass_filenames: false
 

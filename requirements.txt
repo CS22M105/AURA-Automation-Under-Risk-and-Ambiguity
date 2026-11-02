@@ -1,0 +1,16 @@
+# Install from the repository root for native training and local inference.
+# No Colab export is required to train and generate a new demo package.
+# This profile uses the locally verified Transformers 5 / Gradio 6 runtime.
+# Model weights, fitted gates and temperatures are separate saved artifacts.
+torch>=2.7,<3
+transformers==5.18.0
+scikit-learn==1.9.1
+numpy>=2.1,<3
+scipy>=1.14,<2
+pandas>=2.2,<4
+joblib>=1.4,<2
+PyYAML>=6,<7
+gradio==6.31.0
+gradio-client==2.7.2
+matplotlib>=3.8,<4
+huggingface-hub>=1,<2

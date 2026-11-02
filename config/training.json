@@ -1,0 +1,30 @@
+{
+  "dataset": "datasets/train.csv",
+  "test_dataset": "datasets/test.csv",
+  "split_manifest": "data/splits/development_seed_42.json",
+  "workflows": "config/intent_workflows.yaml",
+  "scenarios": "config/consequence_scenarios.yaml",
+  "expected_training_fingerprint": "01612df1d62829c99b8d4ae2df715cc2b2fb39b7716bb635aba94239a3bcb9d0",
+  "encoders": {
+    "DistilBERT": {
+      "model_name": "distilbert/distilbert-base-uncased",
+      "epochs": 5,
+      "batch_size": 16,
+      "gradient_accumulation_steps": 2,
+      "maximum_length": 128,
+      "learning_rate": 0.00004,
+      "seed": 42
+    },
+    "Ettin-150M": {
+      "model_name": "jhu-clsp/ettin-encoder-150m",
+      "epochs": 5,
+      "batch_size": 8,
+      "gradient_accumulation_steps": 4,
+      "maximum_length": 128,
+      "learning_rate": 0.00004,
+      "seed": 42,
+      "attn_implementation": "eager",
+      "reference_compile": false
+    }
+  }
+}

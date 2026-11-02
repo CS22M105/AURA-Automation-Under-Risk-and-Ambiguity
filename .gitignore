@@ -37,3 +37,26 @@ artifacts/
 *.egg-info/
 build/
 dist/
+
+# Private research notes, plans and presentation material
+/docs/
+/Plan/
+/plan/
+/outputs/
+*.md
+!/README.md
+*.pdf
+*.ppt
+*.pptx
+*.doc
+*.docx
+*.pages
+
+# Portable model packages and archives (source code stays in Git)
+*.safetensors
+pytorch_model*.bin
+*.pt
+*.pth
+*.zip
+*.tar
+*.tar.gz
