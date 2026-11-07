@@ -197,8 +197,11 @@ maintained interface code; copies inside exported packages are portable snapshot
 
 - [AURA_Colab_Demo.ipynb](notebooks/AURA_Colab_Demo.ipynb): training, evaluation
   and export. Section 3 loads the accompanying
-  [aura_project_spec.json](notebooks/aura_project_spec.json). Section 13C opens the
-  interface; section 16B exports the prepared models and results.
+  [aura_project_spec.json](notebooks/aura_project_spec.json). Section 13 contains
+  one current-run routing results explorer; section 15 opens the interface;
+  section 16B exports the prepared models and results. The notebook starts without
+  saved outputs. Leave `SHOW_DIAGNOSTICS = False` for the compact flow, or enable
+  it for detailed stage tables, feature inspections and pilot diagnostics.
 - [AURA_Download_Saved_Export.ipynb](notebooks/AURA_Download_Saved_Export.ipynb):
   retrieve an existing Drive export without retraining.
 
@@ -243,3 +246,10 @@ uniform winner across every model and automation target. Live-query thresholds
 come from validation data and do not guarantee the same automation rate on new
 messages. Previously exposed official-test results are not fresh confirmatory
 evidence. The prototype does not execute transactions or send review notifications.
+
+## Run these commands in your terminal:
+cd /Users/farhatjahan/Desktop/YU/YU4/AURA
+source venv/bin/activate
+python aura_demo_package.py
+
+Then open http://127.0.0.1:7860 in your browser.
