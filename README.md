@@ -248,8 +248,8 @@ messages. Previously exposed official-test results are not fresh confirmatory
 evidence. The prototype does not execute transactions or send review notifications.
 
 ## Run these commands in your terminal:
-cd /Users/farhatjahan/Desktop/YU/YU4/AURA
-source venv/bin/activate
-python aura_demo_package.py
+- cd /Users/farhatjahan/Desktop/YU/YU4/AURA
+- source venv/bin/activate
+- python aura_demo_package.py
 
 Then open http://127.0.0.1:7860 in your browser.

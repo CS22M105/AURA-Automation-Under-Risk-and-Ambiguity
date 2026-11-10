@@ -506,14 +506,6 @@ def build_app(backend: NotebookDemo) -> Any:
                     "omitted correction/compliance 3; omitted protection/unauthorized handling 5. "
                     "Use the largest applicable floor. These ratios are research assumptions."
                 )
-            gr.Markdown(
-                "**Reading the demo:** AUTO accepts the proposed intent; DEFER recommends human "
-                "review. No transaction is executed and no review is actually sent. "
-                "Cutoffs come only from development validation. Ties can affect validation "
-                "acceptance, and the target does not guarantee the same automation rate on new "
-                "messages. At 100%, all three policies accept every prediction. "
-                "Scores use different scales; compare each score with its own cutoff."
-            )
             run.click(
                 analyze,
                 inputs=[message, encoder, coverage],
@@ -589,10 +581,6 @@ def build_app(backend: NotebookDemo) -> Any:
                 inputs=classifier_partition,
                 outputs=classifiers,
             )
-        gr.Markdown(
-            f"Run: `{backend.run_id}` · Main policy: **{MAIN_POLICY_LABEL}** · "
-            "Research use only · No labelled outcome is available for live submissions."
-        )
     return app.queue(default_concurrency_limit=1, max_size=8)
 
 
